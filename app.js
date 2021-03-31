@@ -1,12 +1,17 @@
 //Global huvisagchid
-var activePlayer,scores,roundScore;
+var activePlayer,scores,roundScore,isNewGame;
 var diceDom = document.querySelector(".dice"); 
 //togloomiig ehluulehed beltgeh function
 function initGame(){
+    // togloom duussan esehiig shalgah
+    isNewGame = true;
+
     //Toglogchiin eeljiig hadgalah tog1 = 0 tog2 = 1
      activePlayer = 0;
+
     //Toglogchdiin onoog tsugluulah
     scores = [0, 0];
+
     //Toglogchiin eeljindee hadgalj bgaa onoog hadgalah
     roundScore = 0;
     diceDom.style.display = "none";
@@ -28,7 +33,7 @@ initGame();
 
 //shoog shideh tovchluuriin click event hiih
 document.querySelector(".btn-roll").addEventListener("click",function (){
-    
+    if(isNewGame === true){
     //1-6 dotorh sanamsargui too uusgegch
     var diceNumber = Math.floor(Math.random() * 6) + 1;
     //delgetsend shoonii dursiig hargalzuulan gargah
@@ -44,16 +49,18 @@ document.querySelector(".btn-roll").addEventListener("click",function (){
     } else {
         //toglogchiin eeljiig solih
         switchToNextPlayer();
-    }
+    }} else {alert("Togloom duussan tul NEW GAME tovchluuriig darna uu");}
 });
 
 //hold tovchnii event listener
 document.querySelector(".btn-hold").addEventListener("click", function(){
+    if(isNewGame === true){
     // idevhtei toglogchiin tsugluulsan onoog eeljiin onoon deer nemeh
         scores[activePlayer]=scores[activePlayer] + roundScore;
         document.getElementById("score-"+activePlayer).textContent = scores[activePlayer];
     //Idevhtei toglogch hojson eseh
         if(scores[activePlayer]>=100) {
+            isNewGame = false;
             document.getElementById("name-"+activePlayer).textContent = "Player-" + (activePlayer+1) +" Winner!!!"
             document.querySelector(".player-"+activePlayer+"-panel").classList.add("winner");
             document.querySelector(".player-"+activePlayer+"-panel").classList.remove("active");
@@ -61,7 +68,7 @@ document.querySelector(".btn-hold").addEventListener("click", function(){
         } else{
         //toglogchiin eeljiig solino
             switchToNextPlayer();
-        }
+        }} else {alert("Togloom duussan tul NEW GAME tovchluuriig darna uu")}
         
 })
 //idevhtei toglogchiin eeljiig daraagiin toglochruu shiljuuleh function
