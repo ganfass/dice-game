@@ -32,17 +32,37 @@ document.querySelector(".btn-roll").addEventListener("click",function (){
         
         document.getElementById("current-" + activePlayer).textContent = roundScore;
     } else {
-        //1 buusan ued idevhtei onoog tegleh
-        roundScore = 0;
-        document.getElementById("current-" + activePlayer).textContent = 0;
-        // 1 buusan tul toglogchiin eeljiig ene hesegt solij ogno
-        activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-        //Ulaan tsegiig shiljuuleh code
-        document.querySelector(".player-0-panel").classList.toggle("active");
-        document.querySelector(".player-1-panel").classList.toggle("active");
-        //shoog tur alga hiih heseg
-        diceDom.style.display = "none";
+        //toglogchiin eeljiig solih
+        switchToNextPlayer();
     }
-
-
 });
+
+//hold tovchnii event listener
+document.querySelector(".btn-hold").addEventListener("click", function(){
+    // idevhtei toglogchiin tsugluulsan onoog eeljiin onoon deer nemeh
+        scores[activePlayer]=scores[activePlayer] + roundScore;
+        document.getElementById("score-"+activePlayer).textContent = scores[activePlayer];
+    //Idevhtei toglogch hojson eseh
+        if(scores[activePlayer]>=100) {
+            document.getElementById("name-"+activePlayer).textContent = "Player-" + (activePlayer+1) +" Winner!!!"
+            document.querySelector(".player-"+activePlayer+"-panel").classList.add("winner");
+            document.querySelector(".player-"+activePlayer+"-panel").classList.remove("active");
+
+        } else{
+        //toglogchiin eeljiig solino
+            switchToNextPlayer();
+        }
+        
+})
+//idevhtei toglogchiin eeljiig daraagiin toglochruu shiljuuleh function
+function switchToNextPlayer(){
+    roundScore = 0;
+    document.getElementById("current-" + activePlayer).textContent = 0;
+    // 1 buusan tul toglogchiin eeljiig ene hesegt solij ogno
+    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+    //Ulaan tsegiig shiljuuleh code
+    document.querySelector(".player-0-panel").classList.toggle("active");
+    document.querySelector(".player-1-panel").classList.toggle("active");
+    //shoog tur alga hiih heseg
+    diceDom.style.display = "none";
+}
