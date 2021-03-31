@@ -1,20 +1,30 @@
-//Toglogchiin eeljiig hadgalah tog1 = 0 tog2 = 1
-var activePlayer = 0;
-
-//Toglogchdiin onoog tsugluulah
-var scores = [0, 0];
-
-//Toglogchiin eeljindee hadgalj bgaa onoog hadgalah
-var roundScore = 0;
-
-//toglogchiin eeljiin bolon idevhtei onoog 0 es ehluulne
-document.getElementById("score-0").textContent = 0;
-document.getElementById("score-1").textContent = 0;
-document.getElementById("current-0").textContent = 0;
-document.getElementById("current-1").textContent = 0;
-
+//Global huvisagchid
+var activePlayer,scores,roundScore;
 var diceDom = document.querySelector(".dice"); 
-diceDom.style.display = "none";
+//togloomiig ehluulehed beltgeh function
+function initGame(){
+    //Toglogchiin eeljiig hadgalah tog1 = 0 tog2 = 1
+     activePlayer = 0;
+    //Toglogchdiin onoog tsugluulah
+    scores = [0, 0];
+    //Toglogchiin eeljindee hadgalj bgaa onoog hadgalah
+    roundScore = 0;
+    diceDom.style.display = "none";
+    //toglogchiin eeljiin bolon idevhtei onoog 0 es ehluulne
+    document.getElementById("score-0").textContent = 0;
+    document.getElementById("score-1").textContent = 0;
+    document.getElementById("current-0").textContent = 0;
+    document.getElementById("current-1").textContent = 0;
+    //Toglogchdiin neriig butsaaj gargah
+    document.getElementById("name-0").textContent = "player 1";
+    document.getElementById("name-1").textContent = "player 2";
+    document.querySelector(".player-0-panel").classList.remove("winner");
+    document.querySelector(".player-1-panel").classList.remove("winner");
+    document.querySelector(".player-0-panel").classList.remove("active");
+    document.querySelector(".player-1-panel").classList.remove("active");
+    document.querySelector(".player-0-panel").classList.add("active");
+}
+initGame();
 
 //shoog shideh tovchluuriin click event hiih
 document.querySelector(".btn-roll").addEventListener("click",function (){
@@ -66,3 +76,6 @@ function switchToNextPlayer(){
     //shoog tur alga hiih heseg
     diceDom.style.display = "none";
 }
+
+// shine tolgoom ehluuleh tovchnii eventListener
+document.querySelector(".btn-new").addEventListener("click",initGame);
